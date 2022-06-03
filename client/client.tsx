@@ -1,12 +1,13 @@
-import { Provider } from 'mobx-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './app'
-import { rootStore } from './stores'
 
 ReactDOM.hydrate(
-  <Provider store={rootStore}>
+  <BrowserRouter>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </BrowserRouter>,
+  document.documentElement
 )
+
+// *INFO: Reference from: https://reactrouter.com/docs/en/v6/guides/ssr

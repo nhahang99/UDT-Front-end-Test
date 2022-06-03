@@ -1,21 +1,14 @@
-import { observer } from 'mobx-react'
+import { Provider as MobxProvider } from 'mobx-react'
+import Router from './Router'
 import React from 'react'
-import { useStores } from './stores'
+import { rootStore } from './stores'
 
 const App = () => {
-  const { spinnerStore } = useStores()
-  const { isLoading } = spinnerStore
-  console.log('isLoading', isLoading)
-
-  function toggleLoading() {
-    spinnerStore.toggleLoading()
-  }
   return (
-    <div>
-      <h1>Hello World</h1>
-      <button onClick={toggleLoading}>{isLoading ? 'Stop' : 'Start'}</button>
-    </div>
+    <MobxProvider {...rootStore}>
+      <Router />
+    </MobxProvider>
   )
 }
 
-export default observer(App)
+export default App
