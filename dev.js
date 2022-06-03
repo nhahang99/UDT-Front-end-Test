@@ -33,7 +33,7 @@ compiler.hooks.watchRun.tap('Dev', compiler => {
 
 compiler.watch({}, (err, stats) => {
   if (err) {
-    console.error(err)
+    console.error('dev.js', err)
     process.exit(1)
   }
   console.log(stats?.toString('minimal'))

@@ -1,5 +1,6 @@
 {
-  "include": ["client"],
+  "include": ["client", "global.d.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "es6",
     "target": "es5",

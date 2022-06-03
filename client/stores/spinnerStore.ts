@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { RootStore } from '.'
 
 class SpinnerStore {
-  isLoading?: boolean | undefined = undefined
+  isLoading?: boolean = false
   rootStore: RootStore
 
   constructor(rootStore: RootStore) {

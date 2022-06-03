@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react'
 import React from 'react'
 import { useStores } from '../../stores'
+import styles from './homePage.module.scss'
 
 const HomePage = () => {
   const { spinnerStore } = useStores()
@@ -11,7 +12,7 @@ const HomePage = () => {
     spinnerStore.toggleLoading()
   }
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h1>Hello World</h1>
       <button onClick={toggleLoading}>{isLoading ? 'Stop' : 'Start'}</button>
     </div>
