@@ -6,9 +6,21 @@ import './styles/app.scss'
 
 const App = () => {
   return (
-    <MobxProvider {...rootStore}>
-      <Router />
-    </MobxProvider>
+    <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <title>SSR</title>
+        <meta charSet="utf-8"></meta>
+        <meta name="description" content="udt-test-fe"></meta>
+        <link rel="stylesheet" type="text/css" href="client.css"></link>
+        <link rel="shortcut icon" href="https://www.calculator.net/favicon.ico" type="image/x-icon" />
+      </head>
+      <body>
+        <MobxProvider {...rootStore}>
+          <Router />
+        </MobxProvider>
+      </body>
+    </html>
   )
 }
 

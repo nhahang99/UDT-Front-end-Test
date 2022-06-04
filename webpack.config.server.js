@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     server: path.resolve(__dirname, 'server', 'server.tsx')
   },
+  mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
@@ -51,9 +52,6 @@ module.exports = {
     __dirname: false
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [{ context: 'server', from: 'views', to: 'views' }]
-    }),
     new MiniCssExtractPlugin({
       filename: '[name].css'
     })

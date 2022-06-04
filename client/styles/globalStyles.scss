@@ -1,5 +1,19 @@
-:root {
-  --font-weight: 400;
-  --font-weight-bold: 700;
-  --font-weight-black: 900;
-}
+$primary-color: #d07e22;
+$secondary-color: #837d7d;
+
+$text-color: white;
+
+$don-juan-color: #5a5253;
+
+$dark-gray-color: #6a6364;
+$dark-gray-hover-color: #5b484c;
+
+$orange500: $primary-color;
+$orange600: #b26218;
+$orange700: #954a11;
+
+$gray500: $secondary-color;
+$gray600: #705b5d;
+$gray700: #5e3f44;
+
+$web-border: 1px solid #5a5253;
