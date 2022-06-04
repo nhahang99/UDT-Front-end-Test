@@ -3,6 +3,9 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackConfigClient = require('./webpack.config.client')
 const webpackConfigServer = require('./webpack.config.server')
+const killPort = require('kill-port')
+const dotenv = require('dotenv')
+dotenv.config()
 
 const compiler = webpack([
   {
@@ -27,6 +30,7 @@ compiler.hooks.watchRun.tap('Dev', compiler => {
   console.log(`Compiling ${compiler.name} ...`)
   if (compiler.name === 'server' && node) {
     node.kill()
+    killPort(process.env.PORT)
     node = undefined
   }
 })
@@ -34,6 +38,7 @@ compiler.hooks.watchRun.tap('Dev', compiler => {
 compiler.watch({}, (err, stats) => {
   if (err) {
     console.error('dev.js', err)
+    killPort(process.env.PORT)
     process.exit(1)
   }
   console.log(stats?.toString('minimal'))

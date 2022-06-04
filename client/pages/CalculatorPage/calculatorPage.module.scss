@@ -1,0 +1,96 @@
+@import '../../styles/globalStyles.scss';
+
+.container {
+  height: 70vh;
+  width: 50vh;
+  border-radius: 12px;
+  background-color: $don-juan-color;
+  box-shadow: 5px 5px 20px 5px gray;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .wrapper {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    .screen {
+      grid-column: 1 / -1;
+      color: $text-color;
+      text-align: right;
+      padding: 0.5rem;
+      font-size: 4rem;
+      height: 15vh;
+      overflow: hidden;
+      position: relative;
+      .buttonScreen {
+        position: absolute;
+        text-align: left;
+        top: -48px;
+        .buttonTop {
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          border: none;
+        }
+        .buttonRed {
+          background-color: red;
+          margin-right: 5px;
+        }
+        .buttonOrange {
+          background-color: orange;
+          margin-right: 5px;
+        }
+        .buttonGreen {
+          background-color: green;
+        }
+      }
+    }
+
+    .button {
+      display: grid;
+      place-content: center;
+      background-color: $secondary-color;
+      color: $text-color;
+      font-size: 24px;
+      cursor: pointer;
+      border: $web-border;
+      &:hover {
+        background-color: $gray600;
+      }
+
+      &.dark {
+        background-color: $dark-gray-color;
+        color: $text-color;
+        &:hover {
+          background-color: $dark-gray-hover-color;
+        }
+      }
+
+      &.operator,
+      &.equal {
+        background-color: $primary-color;
+        &:hover {
+          background-color: $orange600;
+        }
+      }
+      &.equal {
+        border-bottom-right-radius: 12px;
+      }
+      &.zero {
+        grid-column: 1 / span 2;
+        place-content: unset;
+        align-items: center;
+        padding-left: 2rem;
+        border-bottom-left-radius: 12px;
+      }
+    }
+  }
+}
