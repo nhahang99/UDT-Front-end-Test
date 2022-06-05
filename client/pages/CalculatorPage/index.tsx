@@ -25,10 +25,11 @@ const CalculatorPage = () => {
   }
 
   function oppositeNumber(): void {
-    const inputArray: string[] = input.split('')
-    const lastNumber: string = inputArray[inputArray.length - 1] || NumberEnum.ZERO
+    // get the number after +-*/
+    const numberArray: string[] = input.split(/[+\-*/]/)
+    const lastNumber: string = numberArray[numberArray.length - 1] || NumberEnum.ZERO
     const oppositeNumber: string = String(Number(lastNumber) * -1)
-    calculateStore.setInput(input.slice(0, -1) + ' ' + oppositeNumber)
+    calculateStore.setInput(input.slice(0, Number(`-${lastNumber.length}`)) + ' ' + oppositeNumber)
   }
 
   async function calculate(): Promise<void> {
@@ -37,9 +38,12 @@ const CalculatorPage = () => {
       formattedInput = formattedInput.replace(/%/g, '/100')
       do {
         //* INFO: Replace all -- with - and all ++ with + then replace all +- || -+ with -
+        // remove 0 after +-*/% and before 1-9edInput = formattedInput.replace(/([+-])(0)([1-9])/g, '$1$3'))
         await Promise.all([
-          (formattedInput = formattedInput.replace(/-+/g, '+')),
-          (formattedInput = formattedInput.replace(/\++/g, '+'))
+          (formattedInput = formattedInput.replace(/-+/g, '-')),
+          (formattedInput = formattedInput.replace(/\++/g, '+')),
+          (formattedInput = formattedInput.replace(/([+-])(0)([1-9])/g, '$1$3')),
+          (formattedInput = formattedInput.replace(/([*/])(0)([1-9])/g, '$1$3'))
         ])
         formattedInput = formattedInput.replace(/(\+-)|(-\+)/g, '-')
       } while (
