@@ -1,16 +1,18 @@
 {
-  "include": ["client"],
+  "include": ["client", "global.d.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "es6",
     "target": "es5",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "esModuleInterop": true
   }
 }
