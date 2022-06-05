@@ -12,7 +12,7 @@ const App = () => {
         <title>SSR</title>
         <meta charSet="utf-8"></meta>
         <meta name="description" content="udt-test-fe"></meta>
-        <link rel="stylesheet" type="text/css" href="client.css"></link>
+        <link rel="stylesheet" type="text/css" href="static/client.css"></link>
         <link rel="shortcut icon" href="https://www.calculator.net/favicon.ico" type="image/x-icon" />
       </head>
       <body>

@@ -1,7 +1,10 @@
 const routes = {
-  value: '/calc',
+  value: '/',
   home: {
     value: '/home'
+  },
+  history: {
+    value: '/history'
   }
 }
 

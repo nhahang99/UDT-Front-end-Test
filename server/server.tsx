@@ -10,10 +10,10 @@ dotenv.config({ path: path.join(__dirname, '../', '.env') })
 const server = express()
 const port = process?.env?.PORT || 3001
 
-server.use('/', express.static(path.join(__dirname, 'static')))
+server.use('/static', express.static(path.join(__dirname, 'static')))
 
 server.get('*', (req, res) => {
-  let body = ReactDOMServer.renderToString(
+  const body = ReactDOMServer.renderToString(
     <StaticRouter location={req.url}>
       <App />
     </StaticRouter>
@@ -25,13 +25,13 @@ server.get('*', (req, res) => {
         <title>SSR</title>
         <meta charset="utf-8">
         <meta name="description" content="udt-test-fe">
-        <link rel="stylesheet" type="text/css" href="client.css">
+        <link rel="stylesheet" type="text/css" href="static/client.css">
         <link rel="icon" href="https://www.calculator.net/favicon.ico" type="image/x-icon" />
       </head>
       <body>
         <label>This label from Server</label>
         <div id="root">${body}</div>
-	      <script src="client.js" async></script>
+	      <script src="static/client.js" async></script>
       </body>
     </html>`
   res.send(html)

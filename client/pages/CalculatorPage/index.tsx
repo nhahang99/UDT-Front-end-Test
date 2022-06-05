@@ -1,41 +1,65 @@
 import classnames from 'classnames'
+import { observer } from 'mobx-react-lite'
 import React, { useEffect, useState } from 'react'
+import { NumberEnum, ResetButtonEnum } from '../../enum/calculate'
+import { ICalculate } from '../../interface/caculate'
+import { useStores } from '../../stores'
 import styles from './calculatorPage.module.scss'
-import { operations } from './constants'
-
-export enum ResetButtonEnum {
-  AC = 'AC',
-  C = 'C'
-}
+import { keymapWithEnum } from './constants'
 
 const CalculatorPage = () => {
-  const [input, setInput] = useState<string>('')
   const [deleteButton, setDeleteButton] = useState<ResetButtonEnum>(ResetButtonEnum.AC)
+  const { calculateStore, historyStore } = useStores()
+  const { input } = calculateStore
 
   function handleInput(value: string): void {
-    setInput(input + ' ' + value)
+    if (input === NumberEnum.ZERO) {
+      calculateStore.setInput(String(value))
+    } else {
+      calculateStore.setInput(input + String(value))
+    }
   }
 
   function handleDelete(): void {
-    // TODO: Integrate later
-    setInput(input.slice(0, -1))
+    calculateStore.setInput(NumberEnum.ZERO)
   }
 
   function oppositeNumber(): void {
-    // opposite last number in input
-    const inputArray = input.split(' ')
-    const lastNumber = inputArray[inputArray.length - 1]
-    const oppositeNumber = lastNumber.charAt(0) === '-' ? lastNumber.substring(1) : '-' + lastNumber
-    setInput(input.replace(lastNumber, oppositeNumber))
+    const inputArray: string[] = input.split('')
+    const lastNumber: string = inputArray[inputArray.length - 1] || NumberEnum.ZERO
+    const oppositeNumber: string = String(Number(lastNumber) * -1)
+    calculateStore.setInput(input.slice(0, -1) + ' ' + oppositeNumber)
   }
 
-  function calculate(): void {
-    const result: string = eval(input.replace(/x/g, '*'))
-    setInput(result)
+  async function calculate(): Promise<void> {
+    try {
+      let formattedInput: string = String(input).replace(/x/g, '*')
+      formattedInput = formattedInput.replace(/%/g, '/100')
+      do {
+        //* INFO: Replace all -- with - and all ++ with + then replace all +- || -+ with -
+        await Promise.all([
+          (formattedInput = formattedInput.replace(/-+/g, '+')),
+          (formattedInput = formattedInput.replace(/\++/g, '+'))
+        ])
+        formattedInput = formattedInput.replace(/(\+-)|(-\+)/g, '-')
+      } while (
+        formattedInput.includes('--') ||
+        formattedInput.includes('++') ||
+        formattedInput.includes('+-') ||
+        formattedInput.includes('-+')
+      )
+      const result = eval(`${formattedInput}`)
+      const newCalculateItem: ICalculate = { input, formattedInput, result, createdAt: new Date() }
+      historyStore.appendCalculateItem(newCalculateItem)
+      calculateStore.setInput(String(result))
+    } catch (error) {
+      console.log(error)
+      alert('Math expression invalid')
+    }
   }
 
   useEffect(() => {
-    if (String(input).length > 0) {
+    if (input !== NumberEnum.ZERO) {
       setDeleteButton(ResetButtonEnum.C)
     } else {
       setDeleteButton(ResetButtonEnum.AC)
@@ -57,10 +81,10 @@ const CalculatorPage = () => {
           {deleteButton}
         </button>
         <button className={classnames(styles.button, styles.dark)} onClick={oppositeNumber}>
-          +-
+          +/-
         </button>
 
-        {operations.map((item, index) => {
+        {keymapWithEnum.map((item, index) => {
           return (
             <button
               key={index}
@@ -79,4 +103,4 @@ const CalculatorPage = () => {
   )
 }
 
-export default CalculatorPage
+export default observer(CalculatorPage)
