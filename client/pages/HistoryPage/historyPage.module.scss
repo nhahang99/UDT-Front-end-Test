@@ -1,0 +1,43 @@
+.historyPage {
+  margin: 20px;
+  .table {
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid gray;
+    border-collapse: collapse;
+
+    overflow: visible;
+    border-radius: 4px;
+    width: 100%;
+
+    .thead {
+      tr {
+        border: 1px solid gray;
+
+        th {
+          padding: 20px;
+          font-size: 14px;
+          line-height: 16px;
+          font-weight: bold;
+          white-space: nowrap;
+
+          &:first-child {
+            padding-left: 24px;
+          }
+        }
+      }
+    }
+
+    .tbody {
+      tr {
+        td {
+          padding: 20px;
+          font-size: 14px;
+          line-height: 20px;
+          color: #1f1f1f;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
