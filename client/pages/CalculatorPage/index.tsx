@@ -25,7 +25,7 @@ const CalculatorPage = () => {
   }
 
   function oppositeNumber(): void {
-    // get the number after +-*/
+    //* INFO: get the number after +-*/
     const numberArray: string[] = input.split(/[+\-*/]/)
     const lastNumber: string = numberArray[numberArray.length - 1] || NumberEnum.ZERO
     const oppositeNumber: string = String(Number(lastNumber) * -1)
@@ -38,7 +38,7 @@ const CalculatorPage = () => {
       formattedInput = formattedInput.replace(/%/g, '/100')
       do {
         //* INFO: Replace all -- with - and all ++ with + then replace all +- || -+ with -
-        // remove 0 after +-*/% and before 1-9edInput = formattedInput.replace(/([+-])(0)([1-9])/g, '$1$3'))
+        //* INFO: remove 0 after +-*/% and before 1-9edInput = formattedInput.replace(/([+-])(0)([1-9])/g, '$1$3'))
         await Promise.all([
           (formattedInput = formattedInput.replace(/-+/g, '-')),
           (formattedInput = formattedInput.replace(/\++/g, '+')),

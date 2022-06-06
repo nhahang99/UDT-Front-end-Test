@@ -6,7 +6,6 @@ import styles from './homePage.module.scss'
 const HomePage = () => {
   const { spinnerStore } = useStores()
   const { isLoading } = spinnerStore
-  console.log('isLoading', isLoading)
 
   function toggleLoading() {
     spinnerStore.toggleLoading()
